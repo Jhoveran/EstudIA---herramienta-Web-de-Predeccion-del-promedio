@@ -5,7 +5,7 @@ Este proyecto consiste en el desarrollo de una página web diseñada para ayudar
 
 Este proyecto es una aplicación web diseñada para predecir el promedio futuro de un estudiante universitario. Utiliza un modelo de aprendizaje automático (Random Forest Regressor) entrenado con datos de estudiantes de colegios en Portugal. Los usuarios pueden ingresar información personal, social y académica a través de un formulario para obtener una proyección visualizada del rendimiento hasta el ciclo 10.
 
-![Formulario](https://github.com/Jhoveran/EstudIA---herramienta-Web-de-Predeccion-del-promedio/blob/main/formulario_imagen.jpg?raw=true)
+![Formulario](https://github.com/Jhoveran/EstudIA---herramienta-Web-de-Predeccion-del-promedio/blob/main/static/formulario_imagen.jpg?raw=true)
 
 ## **Proyect Demo**
 
@@ -84,7 +84,7 @@ Estos resultados indican que el modelo tiene un alto grado de precisión en la p
 
 Una característica destacada del proyecto es la generación de gráficas para visualizar la evolución del rendimiento académico proyectado hasta el ciclo 10.
 
-![Gráfico de líneas](https://github.com/Jhoveran/EstudIA---herramienta-Web-de-Predeccion-del-promedio/blob/main/grafica_imagen.jpg?raw=true)
+![Gráfico de líneas](https://github.com/Jhoveran/EstudIA---herramienta-Web-de-Predeccion-del-promedio/blob/main/static/grafica_imagen.jpg?raw=true)
 
 A continuación, se muestra un gráfico generado por el modelo de predicción, donde se visualizan los promedios predichos para los próximos ciclos.
 
