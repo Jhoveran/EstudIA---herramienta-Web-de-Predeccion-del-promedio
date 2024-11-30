@@ -5,7 +5,7 @@ Este proyecto consiste en el desarrollo de una página web diseñada para ayudar
 
 Este proyecto es una aplicación web diseñada para predecir el promedio futuro de un estudiante universitario. Utiliza un modelo de aprendizaje automático (Random Forest Regressor) entrenado con datos de estudiantes de colegios en Portugal. Los usuarios pueden ingresar información personal, social y académica a través de un formulario para obtener una proyección visualizada del rendimiento hasta el ciclo 10.
 
-![Interfaz de usuario gráfica](Aspose.Words.76c1be02-f46d-4ed3-b53f-9c40732f6d5e.001.png)
+[![formulario-imagen.jpg](https://i.postimg.cc/BnbZmysy/formulario-imagen.jpg)](https://postimg.cc/Mnk8T9nb)
 
 ## **Proyect Demo**
 
@@ -37,7 +37,7 @@ El modelo fue entrenado con un conjunto de datos público que contiene informaci
 - **Descripción:**
   Este dataset aborda el logro académico en dos escuelas portuguesas, específicamente en las materias de Matemáticas y Lengua Portuguesa. Los atributos incluyen datos como calificaciones de los tres trimestres (G1, G2, G3), características demográficas (edad, educación de los padres), tiempo de estudio, relaciones familiares y más.
 
-Para más detalles sobre el dataset, puedes consultar el artículo: [Cortez y Silva, 2008](https://archive.ics.uci.edu/ml/datasets/student+performance)
+Data Source: [Student Performance Dataset](https://archive.ics.uci.edu/dataset/320/student+performance)
 
 ## **Model Training**
 
@@ -84,7 +84,7 @@ Estos resultados indican que el modelo tiene un alto grado de precisión en la p
 
 Una característica destacada del proyecto es la generación de gráficas para visualizar la evolución del rendimiento académico proyectado hasta el ciclo 10.
 
-![Gráfico de líneas](Aspose.Words.76c1be02-f46d-4ed3-b53f-9c40732f6d5e.002.png)
+[![grafica-imagen.jpg](https://i.postimg.cc/gkNkqd98/grafica-imagen.jpg)](https://postimg.cc/GHTCdWmm)
 
 A continuación, se muestra un gráfico generado por el modelo de predicción, donde se visualizan los promedios predichos para los próximos ciclos.
 
