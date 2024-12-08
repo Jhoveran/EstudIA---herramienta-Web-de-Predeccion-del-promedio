@@ -10,20 +10,6 @@ Este proyecto es una aplicación web diseñada para predecir el promedio futuro 
 
 ## **Proyect Demo**
 
-### **Demostración de nuestro proyecto**
-
-En esta demostración, mostramos cómo los estudiantes pueden utilizar nuestra aplicación web para predecir su rendimiento académico en ciclos futuros. El video ofrece una guía paso a paso sobre cómo ingresar la información requerida en el formulario y cómo se generan las predicciones utilizando el modelo de predicción.
-
-La demostración destaca las siguientes características clave del proyecto:
-
-1. **Ingreso de Datos:** Cómo los usuarios pueden completar detalles sobre su historial académico, hábitos de estudio y atributos personales mediante un formulario fácil de usar.
-2. **Predicciones en Tiempo Real:** El proceso de generación de predicciones para promedios futuros basado en los datos ingresados mediante un modelo de regresión Random Forest.
-3. **Visualizaciones Interactivas:** 
-   - La aplicación genera gráficos dinámicos que ilustran los promedios predichos para los ciclos futuros.
-   - Estas visualizaciones ayudan a los estudiantes a entender cómo podría evolucionar su rendimiento académico a lo largo del tiempo.
-
-Al ver la demostración, podrás entender cómo se aplica el aprendizaje automático para predecir el rendimiento académico. El video muestra cómo los estudiantes pueden utilizar esta herramienta para planificar mejor sus estudios y mejorar su rendimiento en futuros ciclos.
-
 ## **Key Features**
 
 - **Formulario interactivo:** Captura datos relevantes del estudiante.
