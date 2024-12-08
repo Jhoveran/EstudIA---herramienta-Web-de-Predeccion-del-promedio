@@ -126,7 +126,7 @@ De esta manera, el modelo crea hasta tres series de predicciones, lo que ayuda a
    ```bash
    python app.py  
 
-5. **Abre el navegador en** http://localhost:5000.
+5. **Abre el navegador en** http://127.0.0.1:5000.
 
 ## **Usage**
 
