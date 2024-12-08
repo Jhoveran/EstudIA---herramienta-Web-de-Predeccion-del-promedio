@@ -1,11 +1,12 @@
-# EstudIA – Predicción de Rendimiento Estudiantil
+![image](https://github.com/user-attachments/assets/4bb4de02-3d87-4f09-a266-47cf47b2b2ac)# EstudIA – Predicción de Rendimiento Estudiantil
 Este proyecto consiste en el desarrollo de una página web diseñada para ayudar a estudiantes universitarios a predecir su promedio académico del próximo ciclo. La herramienta utiliza un formulario interactivo en el que los usuarios ingresan información personal y de hábitos, como edad, tiempo dedicado al estudio, actividades sociales, salud mental, entre otros factores. A partir de estos datos, un modelo predictivo estima el promedio esperado, proporcionando una visión personalizada que les permite tomar decisiones informadas para mejorar su desempeño académico.
 
 ## **Overview**
 
 Este proyecto es una aplicación web diseñada para predecir el promedio futuro de un estudiante universitario. Utiliza un modelo de aprendizaje automático (Random Forest Regressor) entrenado con datos de estudiantes de colegios en Portugal. Los usuarios pueden ingresar información personal, social y académica a través de un formulario para obtener una proyección visualizada del rendimiento hasta el ciclo 10.
 
-![Formulario](https://github.com/Jhoveran/EstudIA---herramienta-Web-de-Predeccion-del-promedio/blob/main/static/formulario_imagen.jpg?raw=true)
+![pagina_principal](https://github.com/Jhoveran/EstudIA---herramienta-Web-de-Predeccion-del-promedio/blob/main/imagenes/pagina_principal.png?raw=true)
+![formulario_web](https://github.com/Jhoveran/EstudIA---herramienta-Web-de-Predeccion-del-promedio/blob/main/imagenes/formulario_web.png?raw=true)
 
 ## **Proyect Demo**
 
