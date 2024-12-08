@@ -16,7 +16,7 @@ Este proyecto es una aplicación web diseñada para predecir el promedio futuro 
 - **Modelo de prediccion:** Basada en modelos de regresión con alta precisión como Random Forest.
 - **Metricas y visualizaciones claras:** Gráficas interactivas que muestran la evolución proyectada del promedio del estudiante.
 - **Facilita la deteccion temprana de riesgo academico:** Identifica patrones de riesgo basados en datos históricos.
-- **Promueve la integracion de tecnologias en gestion educativa:** Fomenta el uso de herramientas digitales para optimizar decisiones académicas y personalizar estrategias educativas.
+- **Promueve la integracion de tecnologias en gestion educativa:** Fomenta el uso de herramientas digitales para optimizar decisiones académicas.
 
 ## **Dataset**
 
