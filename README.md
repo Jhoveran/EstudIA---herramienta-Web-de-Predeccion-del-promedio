@@ -85,7 +85,7 @@ Estos resultados indican que el modelo tiene un alto grado de precisión en la p
 
 Una característica destacada del proyecto es la generación de gráficas para visualizar la evolución del rendimiento académico proyectado hasta el ciclo 10.
 
-![Gráfico de líneas](https://github.com/Jhoveran/EstudIA---herramienta-Web-de-Predeccion-del-promedio/blob/main/static/grafica_imagen.jpg?raw=true)
+![Gráfico de líneas](https://github.com/Jhoveran/EstudIA---herramienta-Web-de-Predeccion-del-promedio/blob/main/imagenes/grafica_imagen.jpg?raw=true)
 
 A continuación, se muestra un gráfico generado por el modelo de predicción, donde se visualizan los promedios predichos para los próximos ciclos.
 
