@@ -1,0 +1,64 @@
+/* Barra superior horizontal */
+.bg-primary {
+    background-color: #2067b1 !important; 
+}
+.navbar{
+   height: auto;
+}
+
+.text-white {
+    color: rgb(7, 240, 228) !important; /* Color blanco para el texto */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:xx-large;
+    text-align: center;
+}
+
+.p-3 {
+    padding: 15px; /* Espaciado alrededor del título */
+}
+
+.container h1 {
+    margin: 0; /* Elimina márgenes alrededor del título */
+    justify-content: center;
+}
+
+/* Barra de navegación vertical */
+.navbar {
+ 
+  background-color: rgb(5, 101, 134); /* Color de fondo de la barra lateral */
+  font-size:larger; position:relative;
+  top: 20px; /* Se desplaza hacia abajo para no solaparse con la barra superior */
+  left: 0;
+  width: 40px;
+  height: 60px;
+}
+
+.navbar-nav {
+  flex-direction: column; /* Cambia a disposición vertical */
+}
+
+/* Asegurarse de que el contenido se ajuste a la izquierda después de la barra lateral */
+body {
+  margin-left: 220px;
+  text-align: justify;
+  font-family:Arial, Helvetica, sans-serif;
+  color: rgb(0, 0, 0);
+}
+
+/* Espaciado para el contenido */
+.container {
+  margin-top: 20px; /* Deja espacio para la barra superior */
+}
+.form{
+    display: block;
+    justify-content: center;
+    align-items: center;
+    width: 10px;
+    
+}
+.home-page{
+  background-image: url('/static/images/aula.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}

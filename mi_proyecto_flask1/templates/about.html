@@ -1,0 +1,216 @@
+{% extends "layout.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EstudIA - Formulario</title>
+
+    <!-- Enlace a Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="/static/css/main.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-image: url('https://img.goodfon.com/original/1440x900/a/90/gorod-pautina-internet-set-web.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            color: rgb(37, 24, 94);
+            justify-content:center;
+            align-content: center;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #696da5; 
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(228, 33, 33, 0.1);
+            align-content: center;
+            justify-content: center;
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+            color: white;
+        }
+
+        input[type="number"], select {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+    <!-- Barra de navegación vertical -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info" style="position: fixed; top: 60px; left: 0; height: 100vh; width: 200px;">
+        <div class="container-fluid flex-column">
+            <a class="navbar-brand mt-3 text-center" href="/">Inicio</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav flex-column">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">Acerca de</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenedor principal -->
+    <div class="container" style="margin-left: 220px; margin-top: 60px;">
+
+        <!-- Formulario de Información -->
+        <h1>SOLICITUD DE DATOS</h1>
+        <form id="dataForm" action="/predict" method="POST">
+            <!-- Edad -->
+            <label for="edad">Edad (rango: de 15 a 22):</label>
+            <input type="number" id="edad" name="edad" min="15" max="22" required>
+
+            <!-- Educación del Padre -->
+            <label for="eduPadre">Educación del Padre (Escala: 0 - ninguna, 1 - primaria, 2 - secundaria, 3 - superior):</label>
+            <select id="eduPadre" name="eduPadre" required>
+                <option value="0">0-Ninguna</option>
+                <option value="1">1-Primaria</option>
+                <option value="2">2-Secundaria</option>
+                <option value="3">3-Superior</option>
+            </select>
+
+            <!-- Educación de la Madre -->
+            <label for="eduMadre">Educación de la Madre (Escala: 0 - ninguna, 1 - primaria, 2 - secundaria, 3 - superior):</label>
+            <select id="eduMadre" name="eduMadre" required>
+                <option value="0">0-Ninguna</option>
+                <option value="1">1-Primaria</option>
+                <option value="2">2-Secundaria</option>
+                <option value="3">3-Superior</option>
+            </select>
+
+            <!-- Tiempo de Estudio -->
+            <label for="tiempoEstudio">Tiempo de Estudio (1 - <2 horas, 2 - 2 a 5 horas, 3 - 5 a 10 horas, 4 - >10 horas):</label>
+            <select id="tiempoEstudio" name="tiempoEstudio" required>
+                <option value="1">Menos de 2 horas</option>
+                <option value="2">De 2 a 5 horas</option>
+                <option value="3">De 5 a 10 horas</option>
+                <option value="4">Más de 10 horas</option>
+            </select>
+
+            <!-- Relaciones Familiares -->
+            <label for="relacionesFamiliares">Relaciones Familiares (1 - muy malas a 5 - excelentes):</label>
+            <select id="relacionesFamiliares" name="relacionesFamiliares" required>
+                <option value="1">1-Muy malas</option>
+                <option value="2">2-Malas</option>
+                <option value="3">3-Regulares</option>
+                <option value="4">4-Buenas</option>
+                <option value="5">5-Excelentes</option>
+            </select>
+
+            <!-- Tiempo Libre -->
+            <label for="tiempoLibre">Tiempo Libre (1 - muy bajo a 5 - muy alto):</label>
+            <select id="tiempoLibre" name="tiempoLibre" required>
+                <option value="1">1-Muy bajo</option>
+                <option value="2">2-Bajo</option>
+                <option value="3">3-Moderado</option>
+                <option value="4">4-Alto</option>
+                <option value="5">5-Muy alto</option>
+            </select>
+
+            <!-- Salir con Amigos -->
+            <label for="salirConAmigos">Salir con Amigos (1 - muy bajo a 5 - muy alto):</label>
+            <select id="salirConAmigos" name="salirConAmigos" required>
+                <option value="1">1-Muy bajo</option>
+                <option value="2">2-Bajo</option>
+                <option value="3">3-Moderado</option>
+                <option value="4">4-Alto</option>
+                <option value="5">5-Muy alto</option>
+            </select>
+
+            <!-- Consumo de Alcohol -->
+            <label for="consumoAlcohol">Consumo de Alcohol (1 - muy bajo a 5 - muy alto):</label>
+            <select id="consumoAlcohol" name="consumoAlcohol" required>
+                <option value="1">1-Muy bajo</option>
+                <option value="2">2-Bajo</option>
+                <option value="3">3-Moderado</option>
+                <option value="4">4-Alto</option>
+                <option value="5">5-Muy alto</option>
+            </select>
+
+            <!-- Salud -->
+            <label for="salud">Salud (1 - muy malo a 5 - muy bueno):</label>
+            <select id="salud" name="salud" required>
+                <option value="1">1-Muy malo</option>
+                <option value="2">2-Malo</option>
+                <option value="3">3-Regular</option>
+                <option value="4">4-Bueno</option>
+                <option value="5">5-Muy bueno</option>
+            </select>
+
+            <!-- Ausencias -->
+            <label for="ausencias">Ausencias (0 - 93):</label>
+            <input type="number" id="ausencias" name="ausencias" min="0" max="93" required>
+
+            <!-- Promedio Ponderado ciclo 1 -->
+            <label for="promedioCiclo1">Promedio Ponderado ciclo 1 (0 a 20):</label>
+            <input type="number" id="promedioCiclo1" name="promedioCiclo1" min="0" max="20" required>
+
+            <!-- Promedio Ponderado ciclo 2 -->
+            <label for="promedioCiclo2">Promedio Ponderado ciclo 2 (0 a 20):</label>
+            <input type="number" id="promedioCiclo2" name="promedioCiclo2" min="0" max="20" required>
+
+            <!-- Promedio Ponderado ciclo 3 -->
+            <label for="promedioCiclo3">Promedio Ponderado ciclo 3 (0 a 20):</label>
+            <input type="number" id="promedioCiclo3" name="promedioCiclo3" min="0" max="20" required>
+
+            <!-- Promedio Ponderado ciclo 4 -->
+            <label for="promedioCiclo4">Promedio Ponderado ciclo 4 (0 a 20):</label>
+            <input type="number" id="promedioCiclo4" name="promedioCiclo4" min="0" max="20" required>
+
+            <!-- Botón de Enviar -->
+            <button type="submit">Enviar Información</button>
+        </form>
+
+    </div>
+
+    <!-- Scripts de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-OgVRvuATP1z7Jj3Tt7xC8gCpqzC0ZXbeQXgITn9Bc6wzLgfaYkdER6jU4m4Qmbfg" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
+
+
+{% endblock %}
