@@ -109,12 +109,12 @@ De esta manera, el modelo crea hasta tres series de predicciones, lo que ayuda a
 1. **Clona el repositorio:**
 
    ```bash
-   git clone https://github.com/tu-repositorio/prediccion-academica.git
+   git clone https://github.com/Jhoveran/EstudIA---herramienta-Web-de-Predeccion-del-promedio.git
 
 2. **Navega al directorio del proyecto:**
 
    ```bash
-   cd prediccion-academica  
+   cd mi_proyecto_flask1 
 
 3. **Instala las dependencias:**
 
