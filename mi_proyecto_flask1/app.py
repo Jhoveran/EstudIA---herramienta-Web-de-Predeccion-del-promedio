@@ -1,141 +1,191 @@
-from flask import Flask, request, jsonify, render_template, send_from_directory
-import pickle
+import os
 import numpy as np
 import joblib
 import matplotlib.pyplot as plt
-import os
 import pandas as pd
+from flask import Flask, request, jsonify, render_template, send_from_directory
 
-app = Flask(__name__)
+class StudentPredictor:
+    def __init__(self, model_path=None):
+        """
+        Inicialice el predictor con una ruta de modelo.
 
-@app.route('/')
-def Inicio():
-    # Retorna la página de inicio
-    return render_template('home.html')
+        Args:
+        model_path (str, opcional): Ruta al modelo entrenado.
+        El valor predeterminado es una ruta predefinida si no se proporciona.
+        """
+        if model_path is None:
+            model_path = 'D:\\Proyecto POO\\PLATAFORMA\\env\\mi_proyecto_flask1\\mi_proyecto_flask1\\modelo_random_forest_entrenado.pkl'
+        
+        self.model = self.load_model(model_path)
 
-@app.route('/about')
-def about():
-    # Retorna la página 'about.html'
-    return render_template('about.html')
+    def load_model(self, model_path):
+        """
+        Cargue el modelo de aprendizaje automático entrenado.
 
-@app.route("/predict", methods=['POST'])
+        Args:
+        model_path (str): Ruta al archivo del modelo.
 
-def predict():
-    
-    # Obtener las características del formulario
-    int_features = [
-        int(request.form["edad"]),
-        int(request.form["eduPadre"]),
-        int(request.form["eduMadre"]),
-        int(request.form["tiempoEstudio"]),
-        int(request.form["relacionesFamiliares"]),
-        int(request.form["tiempoLibre"]),
-        int(request.form["salirConAmigos"]),
-        int(request.form["consumoAlcohol"]),
-        int(request.form["salud"]),
-        float(request.form["ausencias"]),
-        int(request.form["promedioCiclo1"]),
-        int(request.form["promedioCiclo2"]),
-        int(request.form["promedioCiclo3"]),
-        int(request.form["promedioCiclo4"])
-    ]
+        Devuelve:
+        Objeto del modelo listo para predicciones
+        """
+        try:
+            return joblib.load(model_path)
+        except Exception as e:
+            raise ValueError(f"Error cargar model: {e}")
 
-    # Extraer las variables del formulario
-    age, fedu, medu, studytime, famrel, freetime, goout, walc, health, absences, val1, val2, val3, val4 = int_features
-    promedio_reales = [val1, val2, val3, val4]
-    
-    predicciones = [[0] * 6 for _ in range(3)]
-   
-    for i in range(len(promedio_reales) - 1):
-        g1 = promedio_reales[i]
-        g2 = promedio_reales[i + 1]
+    def prepare_student_data(self, features):
+        """
+        Preparar los datos de los estudiantes para la predicción.
 
-        # Definir datos del alumno
-        datos_alumno = {
-            'age': age, 'Medu': medu, 'Fedu': fedu, 'traveltime': 3, 
-            'studytime': studytime, 'famrel': famrel, 'freetime': freetime, 
-            'goout': goout, 'Walc': walc, 'health': health, 
-            'absences': absences, 'G1': g1, 'G2': g2
-        }
+        Args:
+        features (dict): Diccionario de características del estudiante
 
-        for j in range(6):
-            # Convertir datos del alumno a DataFrame
-            df_alumno = pd.DataFrame([datos_alumno])
+        Retornos:
+        pandas.DataFrame: Datos preparados del estudiante
+        """
+        return pd.DataFrame([features])
 
-            # Cargar el modelo entrenado
-            ##RFR = joblib.load('E:\mi_proyecto_flask\modelo_random_fores_entrenado.pkl')
+    def predict_grades(self, features_list):
+        """
+        Predecir calificaciones para varios ciclos.
 
-            try:
-                RFR = joblib.load('D:\\Proyecto POO\\PLATAFORMA\\env\\mi_proyecto_flask1\\mi_proyecto_flask1\\modelo_random_forest_entrenado.pkl')
-                print("Modelo cargado correctamente.")
-            except Exception as e:
-                print(f"Error al cargar el modelo: {e}")
-                #Aquí puedes devolver un mensaje de error a la página web, por ejemplo:
-                return render_template('error.html', message=f"Hubo un problema al cargar el modelo: {e}")
+        Args:
+        features_list (lista): Lista de diccionarios de características para cada ciclo
 
+        Retornos:
+        list: Calificaciones predichas para cada ciclo
+        """
+        predicciones = [[0] * 6 for _ in range(3)]
 
-            # Predecir la calificación final G3
-            prediccion_G3 = RFR.predict(df_alumno)[0]
-            predicciones[i][j] = prediccion_G3
+        for i in range(len(features_list) - 1):
+            datos_alumno = features_list[i]
 
-            # Actualizar G1 y G2 para la siguiente iteración
-            datos_alumno['G1'] = datos_alumno['G2']  # G1 toma el valor de G2 actual
-            datos_alumno['G2'] = prediccion_G3       # G2 toma el valor predicho de G3
+            for j in range(6):
+                df_alumno = self.prepare_student_data(datos_alumno)
+                prediccion_G3 = self.model.predict(df_alumno)[0]
+                predicciones[i][j] = prediccion_G3
 
-    # Guardar la gráfica y pasar el nombre de archivo para mostrarla en la página
-    return graficar_datos(predicciones, promedio_reales)
+                # Update G1 and G2 for next iteration
+                datos_alumno['G1'] = datos_alumno['G2']
+                datos_alumno['G2'] = prediccion_G3
 
-def graficar_datos(predicciones, promedio_reales):
-    # Crear la lista de ciclos para el eje X
-    ciclos = [f'Ciclo {i+1}' for i in range(10)]
+        return predicciones
 
-    # Crear la figura
-    fig, ax = plt.subplots(figsize=(10, 5))
+class GraphPlotter:
+    @staticmethod
+    def plot_predictions(predicciones, promedio_reales, output_path='static/grafica.png'):
+        """
+        Crea un gráfico de calificaciones reales y predichas.
 
-    # Graficar valores reales para ciclo 1 y ciclo 2
-    ax.plot(ciclos[:4], promedio_reales, marker='o', color='red', label="Valores Reales")
+        Args:
+        predicciones(lista): Calificaciones predichas
+        promedio_reales(lista): Calificaciones reales
+        output_path(str): Ruta para guardar el gráfico
 
-    # Colores para las diferentes predicciones
-    colores_prediccion = ['blue', 'green', 'purple']
+        Retornos:
+        str: Ruta al gráfico guardado
+        """
+        ciclos = [f'Ciclo {i+1}' for i in range(10)]
+        fig, ax = plt.subplots(figsize=(10, 5))
 
-    # Graficar las predicciones para cada par de valores
-    for i in range(3):  # Para cada conjunto de predicciones
-        # Determinar el punto de inicio en el eje x basado en el último valor usado
-        inicio_x = i + 2  # Ciclo 3, 4, 5 respectivamente
-        x_range = ciclos[inicio_x:inicio_x+6]
-        ax.plot(x_range, predicciones[i], marker='o', color=colores_prediccion[i], label=f"Predicciones {i+1} (val{i+1}-val{i+2})")
+        ax.plot(ciclos[:4], promedio_reales, marker='o', color='red', label="Valores Reales")
 
-    # Añadir títulos y etiquetas
-    ax.set_title("Predicción de Promedios Proximos ciclos con RF")
-    ax.set_xlabel("Ciclos")
-    ax.set_ylabel("Promedio Predicho")
-    ax.legend()
-    ax.grid(True)
+        colores_prediccion = ['blue', 'green', 'purple']
 
-    # Guardar la gráfica como archivo PNG en la carpeta 'static'
-    image_path = os.path.join('static', 'grafica.png')
+        for i in range(3):
+            inicio_x = i + 2
+            x_range = ciclos[inicio_x:inicio_x+6]
+            ax.plot(x_range, predicciones[i], marker='o', color=colores_prediccion[i], 
+                    label=f"Predicciones {i+1} (val{i+1}-val{i+2})")
 
-    try:
-        fig.savefig(image_path)
-        print(f"Gráfica guardada en {image_path}")
-    
-    except Exception as e:
-        print(f"Error al guardar la gráfica: {e}")
-        return render_template('error.html', message=f"Hubo un problema al guardar la gráfica: {e}")
+        ax.set_title("Predicción de Promedios Proximos ciclos con RF")
+        ax.set_xlabel("Ciclos")
+        ax.set_ylabel("Promedio Predicho")
+        ax.legend()
+        ax.grid(True)
 
+        try:
+            fig.savefig(output_path)
+            plt.close(fig)
+            return output_path
+        except Exception as e:
+            raise ValueError(f"Error saving graph: {e}")
 
-    # Cerrar la figura para liberar memoria
-    plt.close(fig)
+def create_app(predictor=None, plotter=None):
+    """
+    Crear y configurar la aplicación Flask.
 
-    # Pasar la ruta de la imagen a la página web para renderizarla
-    return render_template('resultados.html', image_url=image_path)
+    Args:
+    predictor (StudentPredictor, opcional): instancia del predictor
+    plotter (GraphPlotter, opcional): instancia del trazador de gráficos
 
-@app.route('/static/<filename>')
-def serve_static(filename):
-    return send_from_directory('static', filename)
+    Devuelve:
+    Flask: aplicación Flask configurada
+    """
+    app = Flask(__name__)
+    predictor = predictor or StudentPredictor()
+    plotter = plotter or GraphPlotter()
 
-if __name__ == '__main__':
-    # Asegúrese de que la carpeta 'static' existe
+    @app.route('/')
+    def inicio():
+        return render_template('home.html')
+
+    @app.route('/about')
+    def about():
+        return render_template('about.html')
+
+    @app.route("/predict", methods=['POST'])
+    def predict():
+        try:
+            int_features = [
+                int(request.form["edad"]),
+                int(request.form["eduPadre"]),
+                int(request.form["eduMadre"]),
+                int(request.form["tiempoEstudio"]),
+                int(request.form["relacionesFamiliares"]),
+                int(request.form["tiempoLibre"]),
+                int(request.form["salirConAmigos"]),
+                int(request.form["consumoAlcohol"]),
+                int(request.form["salud"]),
+                float(request.form["ausencias"]),
+                int(request.form["promedioCiclo1"]),
+                int(request.form["promedioCiclo2"]),
+                int(request.form["promedioCiclo3"]),
+                int(request.form["promedioCiclo4"])
+            ]
+
+            age, fedu, medu, studytime, famrel, freetime, goout, walc, health, absences, val1, val2, val3, val4 = int_features
+            promedio_reales = [val1, val2, val3, val4]
+
+            features_list = []
+            for i in range(len(promedio_reales) - 1):
+                features_list.append({
+                    'age': age, 'Medu': medu, 'Fedu': fedu, 'traveltime': 3,
+                    'studytime': studytime, 'famrel': famrel, 'freetime': freetime,
+                    'goout': goout, 'Walc': walc, 'health': health,
+                    'absences': absences, 'G1': promedio_reales[i], 
+                    'G2': promedio_reales[i + 1]
+                })
+
+            predicciones = predictor.predict_grades(features_list)
+            graph_path = plotter.plot_predictions(predicciones, promedio_reales)
+            return render_template('resultados.html', image_url=graph_path)
+
+        except Exception as e:
+            return render_template('error.html', message=str(e))
+
+    @app.route('/static/<filename>')
+    def serve_static(filename):
+        return send_from_directory('static', filename)
+
+    return app
+
+def main():
+    app = create_app()
     if not os.path.exists('static'):
         os.makedirs('static')
     app.run(debug=True)
+
+if __name__ == '__main__':
+    main()
